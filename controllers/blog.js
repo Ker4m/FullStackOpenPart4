@@ -8,6 +8,7 @@ blogRouter.get('/api/blogs', async (request, response) => {
 
 blogRouter.post('/api/blogs', async (request, response) => {
   const blog = new Blog(request.body)
+  if(!blog.title && !blog.url)response.status(400)
   const savedBlog = await blog.save()
   response.status(201).json(savedBlog)
 })

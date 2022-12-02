@@ -47,6 +47,7 @@ test('a valid blog can be added ', async () => {
   const newBlog = {
     title: 'Developer lifestyles',
     author: 'Elon',
+    url: '/twitter',
     likes:3
   }
 
@@ -68,7 +69,8 @@ test('a valid blog can be added ', async () => {
 test('default value of likes for a new blog, if not specidied, is 0 ', async () => {
   const newBlog = {
     title: 'Developer lifestyles',
-    author: 'Elon'
+    author: 'Elon',
+    url: '/twitter'
   }
 
   await api
@@ -81,21 +83,39 @@ test('default value of likes for a new blog, if not specidied, is 0 ', async () 
 
 })
 
-// test('note without title is not added', async () => {
-//   const newBlog = {
-//     likes: 5,
-//     author: 'John',
-//   }
+test('blog without title responds error code 400', async () => {
+  const newBlog = {
+    likes: 5,
+    author: 'John',
+    url: 'http://fdfgdgd.com/blog'
+  }
 
-//   await api
-//     .post('/api/blogs')
-//     .send(newBlog)
-//     .expect(400)
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
 
-//   const notesAtEnd = await helper.notesInDb()
+  const blogsAtEnd = await helper.blogsInDb()
 
-//   expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
-// })
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+})
+
+test('blog without url responds error code 400', async () => {
+  const newBlog = {
+    likes: 5,
+    author: 'John',
+    title: 'A nice title'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+})
 
 afterAll(() => {
   mongoose.connection.close()
