@@ -65,6 +65,22 @@ test('a valid blog can be added ', async () => {
   )
 })
 
+test('default value of likes for a new blog, if not specidied, is 0 ', async () => {
+  const newBlog = {
+    title: 'Developer lifestyles',
+    author: 'Elon'
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd.at(-1).likes).toBe(0)
+
+})
+
 // test('note without title is not added', async () => {
 //   const newBlog = {
 //     likes: 5,
