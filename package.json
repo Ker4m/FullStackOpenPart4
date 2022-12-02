@@ -1,0 +1,31 @@
+{
+  "name": "fullstackopenpart4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ker4m/FullStackOpenPart4.git"
+  },
+  "author": "Marek Elmayan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ker4m/FullStackOpenPart4/issues"
+  },
+  "homepage": "https://github.com/Ker4m/FullStackOpenPart4#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.7.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "nodemon": "^2.0.20"
+  }
+}
