@@ -143,7 +143,7 @@ describe('when there is initially some blogs saved', () => {
   })
 
   describe('update of a blog', () => {
-    test.only('update the amount of likes for a blog post', async () => {
+    test('update the amount of likes for a blog post', async () => {
       const blogsAtStart = await helper.blogsInDb()
       const blogToUpdate = blogsAtStart[0]
       const body = JSON.stringify({ likes:99 })
