@@ -143,13 +143,14 @@ describe('when there is initially some blogs saved', () => {
   })
 
   describe('update of a blog', () => {
-    test('update the amount of likes for a blog post', async () => {
-      const blogssAtStart = await helper.blogsInDb()
-      const blogToUpdate = blogssAtStart[0]
+    test.only('update the amount of likes for a blog post', async () => {
+      const blogsAtStart = await helper.blogsInDb()
+      const blogToUpdate = blogsAtStart[0]
+      const body = JSON.stringify({ likes:99 })
 
       await api
-        .put(`/api/blogs/${blogToUpdate.id}`, { likes:99 })
-        .expect(204)
+        .put(`/api/blogs/${blogToUpdate.id}`, body)
+        .expect(200)
 
       const blogsAtEnd = await helper.blogsInDb()
 
@@ -157,7 +158,7 @@ describe('when there is initially some blogs saved', () => {
         helper.initialBlogs.length
       )
 
-      expect(blogsAtEnd.find(b => b.id === blogToUpdate.id).likes).toBe(99)
+      expect(blogsAtEnd[0].likes).toBe(99)
     })
   })
 
